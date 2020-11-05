@@ -18,6 +18,7 @@ class BookmarkListBuilder extends EntityListBuilder {
    */
   public function buildHeader() {
     $header['id'] = $this->t('Bookmark ID');
+    $header['bundle_id'] = $this->t('Bundle');
     $header['name'] = $this->t('Name');
     return $header + parent::buildHeader();
   }
@@ -28,6 +29,7 @@ class BookmarkListBuilder extends EntityListBuilder {
   public function buildRow(EntityInterface $entity) {
     /* @var \Drupal\bookmarks\Entity\Bookmark $entity */
     $row['id'] = $entity->id();
+    $row['bundle_id'] = $entity->bundle();
     $row['name'] = Link::createFromRoute(
       $entity->label(),
       'entity.bookmark.edit_form',

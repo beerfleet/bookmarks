@@ -142,6 +142,13 @@ class Bookmark extends EditorialContentEntityBase implements BookmarkInterface {
   /**
    * {@inheritdoc}
    */
+  public function getTags(): string {
+    return $this->get('bookmark_tags')->value;    
+  }
+
+  /**
+   * {@inheritdoc}
+   */
   public function getCreatedTime() {
     return $this->get('created')->value;
   }
@@ -243,7 +250,9 @@ class Bookmark extends EditorialContentEntityBase implements BookmarkInterface {
       ->setRequired(TRUE);
 
     // Bookmark Tags
-    $fields['tags'] = BaseFieldDefinition::create('entity_reference')
+    $fields['bookmark_tags'] = BaseFieldDefinition::create('entity_reference')
+      ->setLabel(t('Bookmark tags'))
+      ->setDescription(t('Tagging for Bookmarks.'))
       ->setSetting('target_type', 'taxonomy_term')
       ->setSetting('handler', 'default:taxonomy_term')
       ->setSetting('handler_settings',

@@ -37,6 +37,14 @@ interface BookmarkInterface extends ContentEntityInterface, RevisionLogInterface
    *   The called Bookmark entity.
    */
   public function setName($name);
+  
+  /**
+   * Gets the assigned tags
+   * 
+   * @return string
+   *   Bookmarks' tags
+   */
+  public function getTags();
 
   /**
    * Gets the Bookmark creation timestamp.
