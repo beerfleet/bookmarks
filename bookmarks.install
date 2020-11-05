@@ -1,0 +1,24 @@
+<?php
+
+// Put the following line in the top of the .install file:
+use Drupal\taxonomy\Entity\Term;
+
+/**
+ * Add some terms to the Category vocabulary.
+ */
+function bookmarks_install() {
+  // Term names to be added.
+  $vid= 'bookmark_tags';
+  $items = [
+    'Tutorials',
+    'Comedies',
+    'Movies',
+  ];
+  foreach ($items as $item) {
+    $term = Term::create(array(
+      'parent' => array(),
+      'name' => $item,
+      'vid' => $vid,
+    ))->save();
+  }
+}

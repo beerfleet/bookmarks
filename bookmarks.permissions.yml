@@ -1,0 +1,33 @@
+add bookmark entities:
+  title: 'Create new Bookmark entities'
+
+administer bookmark entities:
+  title: 'Administer Bookmark entities'
+  description: 'Allow to access the administration form to configure Bookmark entities.'
+  restrict access: true
+
+delete bookmark entities:
+  title: 'Delete Bookmark entities'
+
+edit bookmark entities:
+  title: 'Edit Bookmark entities'
+
+view published bookmark entities:
+  title: 'View published Bookmark entities'
+
+view unpublished bookmark entities:
+  title: 'View unpublished Bookmark entities'
+
+view all bookmark revisions:
+  title: 'View all Bookmark revisions'
+
+revert all bookmark revisions:
+  title: 'Revert all Bookmark revisions'
+  description: 'Role requires permission <em>view Bookmark revisions</em> and <em>edit rights</em> for bookmark entities in question or <em>administer bookmark entities</em>.'
+
+delete all bookmark revisions:
+  title: 'Delete all revisions'
+  description: 'Role requires permission to <em>view Bookmark revisions</em> and <em>delete rights</em> for bookmark entities in question or <em>administer bookmark entities</em>.'
+
+permission_callbacks:
+  - \Drupal\bookmarks\BookmarkPermissions::generatePermissions

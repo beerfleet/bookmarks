@@ -1,0 +1,59 @@
+<?php
+
+/**
+ * @file
+ * Contains bookmarks.module.
+ */
+
+use Drupal\Core\Routing\RouteMatchInterface;
+
+/**
+ * Implements hook_help().
+ */
+function bookmarks_help($route_name, RouteMatchInterface $route_match) {
+  switch ($route_name) {
+    // Main module help for the bookmarks module.
+    case 'help.page.bookmarks':
+      $output = '';
+      $output .= '<h3>' . t('About') . '</h3>';
+      $output .= '<p>' . t('My very own bookmarks keeping tool') . '</p>';
+      return $output;
+
+    default:
+  }
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function bookmarks_theme() {
+  $theme = [];
+  $theme['bookmark'] = [
+    'render element' => 'elements',
+    'file' => 'bookmark.page.inc',
+    'template' => 'bookmark',
+  ];
+  $theme['bookmark_content_add_list'] = [
+    'render element' => 'content',
+    'variables' => ['content' => NULL],
+    'file' => 'bookmark.page.inc',
+  ];
+  return $theme;
+}
+
+/**
+ * Implements hook_theme_suggestions_HOOK().
+ */
+function bookmarks_theme_suggestions_bookmark(array $variables) {
+  $suggestions = [];
+  $entity = $variables['elements']['#bookmark'];
+  $sanitized_view_mode = strtr($variables['elements']['#view_mode'], '.', '_');
+
+  $suggestions[] = 'bookmark__' . $sanitized_view_mode;
+  $suggestions[] = 'bookmark__' . $entity->bundle();
+  $suggestions[] = 'bookmark__' . $entity->bundle() . '__' . $sanitized_view_mode;
+  $suggestions[] = 'bookmark__' . $entity->id();
+  $suggestions[] = 'bookmark__' . $entity->id() . '__' . $sanitized_view_mode;
+  return $suggestions;
+}

@@ -1,0 +1,13 @@
+langcode: en
+status: true
+name: Bookmark Tags
+vid: bookmark_tags
+description: 'Bookmark tags vocabulary.'
+hierarchy: 0
+weight: 0
+dependencies:
+  module:
+    - bookmarks
+  enforced:
+    module:
+      - bookmarks

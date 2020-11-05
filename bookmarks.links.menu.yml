@@ -1,0 +1,17 @@
+
+# Bookmark menu items definition
+entity.bookmark.collection:
+  title: 'Bookmark list'
+  route_name: entity.bookmark.collection
+  description: 'List Bookmark entities'
+  parent: system.admin_structure
+  weight: 100
+
+
+# Bookmark type menu items definition
+entity.bookmark_type.collection:
+  title: 'Bookmark type'
+  route_name: entity.bookmark_type.collection
+  description: 'List Bookmark type (bundles)'
+  parent: system.admin_structure
+  weight: 99

@@ -1,0 +1,5 @@
+name: 'bookmarks'
+type: module
+description: 'My very own bookmarks keeping tool'
+core: 8.x
+package: 'Custom'
