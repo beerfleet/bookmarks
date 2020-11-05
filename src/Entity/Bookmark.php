@@ -95,8 +95,7 @@ class Bookmark extends EditorialContentEntityBase implements BookmarkInterface {
 
     if ($rel === 'revision_revert' && $this instanceof RevisionableInterface) {
       $uri_route_parameters[$this->getEntityTypeId() . '_revision'] = $this->getRevisionId();
-    }
-    elseif ($rel === 'revision_delete' && $this instanceof RevisionableInterface) {
+    } elseif ($rel === 'revision_delete' && $this instanceof RevisionableInterface) {
       $uri_route_parameters[$this->getEntityTypeId() . '_revision'] = $this->getRevisionId();
     }
 
@@ -194,6 +193,7 @@ class Bookmark extends EditorialContentEntityBase implements BookmarkInterface {
     // Add the published field.
     $fields += static::publishedBaseFieldDefinitions($entity_type);
 
+    // owner reference
     $fields['user_id'] = BaseFieldDefinition::create('entity_reference')
       ->setLabel(t('Authored by'))
       ->setDescription(t('The user ID of author of the Bookmark entity.'))
@@ -219,6 +219,7 @@ class Bookmark extends EditorialContentEntityBase implements BookmarkInterface {
       ->setDisplayConfigurable('form', TRUE)
       ->setDisplayConfigurable('view', TRUE);
 
+    // Bookmark name
     $fields['name'] = BaseFieldDefinition::create('string')
       ->setLabel(t('Name'))
       ->setDescription(t('The name of the Bookmark entity.'))
@@ -241,11 +242,39 @@ class Bookmark extends EditorialContentEntityBase implements BookmarkInterface {
       ->setDisplayConfigurable('view', TRUE)
       ->setRequired(TRUE);
 
+    // Bookmark Tags
+    $fields['tags'] = BaseFieldDefinition::create('entity_reference')
+      ->setSetting('target_type', 'taxonomy_term')
+      ->setSetting('handler', 'default:taxonomy_term')
+      ->setSetting('handler_settings',
+        array(
+          'target_bundles' => array(
+            'bookmark_tags' => 'bookmark_tags'
+        )))
+      ->setDisplayOptions('view', array(
+        'label' => 'hidden',
+        'type' => 'author',
+        'weight' => 0,
+      ))
+      ->setDisplayOptions('form', array(
+        'type' => 'entity_reference_autocomplete',
+        'weight' => 3,
+        'settings' => array(
+          'match_operator' => 'CONTAINS',
+          'size' => '10',
+          'autocomplete_type' => 'tags',
+          'placeholder' => '',
+        ),
+      ))
+      ->setDisplayConfigurable('form', TRUE)
+      ->setDisplayConfigurable('view', TRUE);
+
+    // publish status
     $fields['status']->setDescription(t('A boolean indicating whether the Bookmark is published.'))
       ->setDisplayOptions('form', [
         'type' => 'boolean_checkbox',
         'weight' => -3,
-      ]);
+    ]);
 
     $fields['created'] = BaseFieldDefinition::create('created')
       ->setLabel(t('Created'))
