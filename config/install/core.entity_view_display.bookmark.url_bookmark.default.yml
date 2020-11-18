@@ -13,7 +13,7 @@ bundle: url_bookmark
 mode: default
 content:
   bookmark_tags:
-    label: hidden
+    label: above
     type: entity_reference_entity_view
     weight: 3
     region: content
