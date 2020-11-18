@@ -1,0 +1,18 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - bookmarks.bookmark_type.url_bookmark
+    - field.storage.bookmark.field_description
+id: bookmark.url_bookmark.field_description
+field_name: field_description
+entity_type: bookmark
+bundle: url_bookmark
+label: Description
+description: ''
+required: false
+translatable: false
+default_value: {  }
+default_value_callback: ''
+settings: {  }
+field_type: string

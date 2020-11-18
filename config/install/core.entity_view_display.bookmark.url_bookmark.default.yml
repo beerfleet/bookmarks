@@ -1,0 +1,53 @@
+langcode: en
+status: true
+dependencies:
+  config:
+    - bookmarks.bookmark_type.url_bookmark
+    - field.field.bookmark.url_bookmark.field_description
+    - field.field.bookmark.url_bookmark.field_url
+  module:
+    - link
+id: bookmark.url_bookmark.default
+targetEntityType: bookmark
+bundle: url_bookmark
+mode: default
+content:
+  bookmark_tags:
+    label: hidden
+    type: entity_reference_entity_view
+    weight: 3
+    region: content
+    settings:
+      view_mode: default
+      link: false
+    third_party_settings: {  }
+  field_description:
+    weight: 2
+    label: above
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+    type: string
+    region: content
+  field_url:
+    weight: 1
+    label: above
+    settings:
+      trim_length: 80
+      url_only: false
+      url_plain: false
+      rel: ''
+      target: ''
+    third_party_settings: {  }
+    type: link
+    region: content
+  name:
+    label: above
+    type: string
+    weight: 0
+    region: content
+    settings:
+      link_to_entity: false
+    third_party_settings: {  }
+hidden:
+  user_id: true
