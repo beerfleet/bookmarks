@@ -10,6 +10,7 @@ use Drupal\Core\Entity\EntityChangedTrait;
 use Drupal\Core\Entity\EntityPublishedTrait;
 use Drupal\Core\Entity\EntityTypeInterface;
 use Drupal\user\UserInterface;
+use Drupal\Core\Field\FieldStorageDefinitionInterface;
 
 /**
  * Defines the Bookmark entity.
@@ -266,7 +267,7 @@ class Bookmark extends EditorialContentEntityBase implements BookmarkInterface {
         'weight' => 0,
       ))
       ->setDisplayOptions('form', array(
-        'type' => 'entity_reference_autocomplete',
+        'type' => 'entity_reference_autocomplete_tags',
         'weight' => 3,
         'settings' => array(
           'match_operator' => 'CONTAINS',
@@ -276,7 +277,9 @@ class Bookmark extends EditorialContentEntityBase implements BookmarkInterface {
         ),
       ))
       ->setDisplayConfigurable('form', TRUE)
-      ->setDisplayConfigurable('view', TRUE);
+      ->setDisplayConfigurable('view', TRUE)
+      ->setRequired(TRUE)
+      ->setCardinality(FieldStorageDefinitionInterface::CARDINALITY_UNLIMITED);
 
     // publish status
     $fields['status']->setDescription(t('A boolean indicating whether the Bookmark is published.'))
